@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            margin: 0;
+        }
+        form {
+            width: 60%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+        }
+        a:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${doctor.id == null ? 'Registrar Doctor' : 'Editar Doctor'}"></h1>
+<form th:action="@{${doctor.id == null ? '/doctores' : '/doctores/' + doctor.id}}" method="post">
+    <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" th:value="${doctor.nombre}" required/>
+    </div>
+    <div>
+        <label for="apellidoPaterno">Apellido Paterno</label>
+        <input type="text" id="apellidoPaterno" name="apellidoPaterno" th:value="${doctor.apellidoPaterno}" required/>
+    </div>
+    <div>
+        <label for="apellidoMaterno">Apellido Materno</label>
+        <input type="text" id="apellidoMaterno" name="apellidoMaterno" th:value="${doctor.apellidoMaterno}" required/>
+    </div>
+    <div>
+        <label for="especialidad">Especialidad</label>
+        <input type="text" id="especialidad" name="especialidad" th:value="${doctor.especialidad}" required/>
+    </div>
+    <button type="submit" th:text="${doctor.id == null ? 'Guardar' : 'Actualizar'}"></button>
+</form>
+<a href="/doctores">Ver todos</a>
+</body>
+</html>

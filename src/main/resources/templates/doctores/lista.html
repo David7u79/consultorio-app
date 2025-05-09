@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Doctores</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7f6;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        text-align: center;
+        padding: 20px;
+        background-color: #4CAF50;
+        color: white;
+        margin: 0;
+    }
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: white;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    td a, td button {
+        text-decoration: none;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        cursor: pointer;
+        margin: 5px;
+    }
+    td button {
+        background-color: #f44336;
+    }
+    td a:hover, td button:hover {
+        opacity: 0.8;
+    }
+    a {
+        display: block;
+        width: 180px;
+        margin: 20px auto;
+        text-align: center;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+    }
+    a:hover {
+        opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+<h1>Lista de Doctores</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido Paterno</th>
+    <th>Apellido Materno</th>
+    <th>Especialidad</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="doctor : ${doctores}">
+    <td th:text="${doctor.nombre}"></td>
+    <td th:text="${doctor.apellidoPaterno}"></td>
+    <td th:text="${doctor.apellidoMaterno}"></td>
+    <td th:text="${doctor.especialidad}"></td>
+    <td>
+      <a th:href="@{/doctores/{id}/editar(id=${doctor.id})}">Editar</a>
+      <form th:action="@{/doctores/{id}/eliminar(id=${doctor.id})}" method="post" style="display:inline;">
+        <button type="submit" onclick="return confirm('¿Estás seguro de eliminar este doctor?')">Eliminar</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a href="/doctores/nuevo">Registrar nuevo doctor</a>
+</body>
+</html>
